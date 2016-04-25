@@ -1,18 +1,16 @@
 def alphabet
   hash = {}
+  dic = ["a", "e", "i", "o", "u", "y"]
   letters = ("a".."z").to_a
-  letters.each_with_index { |item, index| hash[item] = index + 1 }
-  
-  total = {
-    "a" => hash["a"],
-    "e" => hash["e"],
-    "i" => hash["i"],
-    "o" => hash["o"],
-    "u" => hash["u"],
-    "y" => hash["y"],
-  }
+  letters.each_with_index do |item, index|
+    dic.each do |i|
+      if i.include?(item)
+        hash[i] = index + 1
+      end
+    end
+  end
 
-  puts total.inspect
+  puts hash.inspect
 end
 
 alphabet
