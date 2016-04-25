@@ -1,5 +1,5 @@
 def task
-  arr = [ [1, 31], [2, 28], [3, 31], [4, 30], [5, 31], [6, 30], [7, 31], [8, 31], [9, 30], [10, 31], [11, 30], [12, 31] ]
+  arr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
   puts "Enter date"
   date = gets.chomp.to_i
@@ -12,14 +12,11 @@ def task
 
   count = 0
   for i in 0..month-1
-    count += arr[i][1] 
+    count += arr[i] 
   end
-
-  if year % 4 == 0 or year % 400 == 0
-    var = count + date - arr[month-1][1] + 1
-  else
-    var = count + date - arr[month-1][1]
-  end
+  
+  var = count + date - arr[month-1]
+  var = var + 1 if (year % 4 == 0 or year % 400 == 0) and month > 2
 
 puts var
 end

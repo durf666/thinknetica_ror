@@ -18,8 +18,9 @@ def shop
   total_price = 0
 
   cart.each do |key, value|
-    puts "#{key}: #{value[:price] * value[:amount] }"
-    total_price += value[:price] *  value[:amount]
+    product = value[:price] * value[:amount]
+    puts "#{key}: #{product}"
+    total_price += product
   end
 
   puts "total: #{total_price}$" 

@@ -1,9 +1,9 @@
 def alphabet
   hash = {}
   letters = ("a".."z").to_a
-  letters.each_with_index { |item, index| hash[item] = index }
-
-  puts total = {
+  letters.each_with_index { |item, index| hash[item] = index + 1 }
+  
+  total = {
     "a" => hash["a"],
     "e" => hash["e"],
     "i" => hash["i"],
@@ -11,6 +11,8 @@ def alphabet
     "u" => hash["u"],
     "y" => hash["y"],
   }
+
+  puts total.inspect
 end
 
 alphabet
