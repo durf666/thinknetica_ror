@@ -1,9 +1,16 @@
-def letters
-  letter = ['a', 'e', 'i', 'o', 'u', 'y']
-  numbers = [0, 4, 8, 14, 20, 24]
+def alphabet
+  hash = {}
+  letters = ("a".."z").to_a
+  letters.each_with_index { |item, index| hash[item] = index }
 
-  hash = Hash[letter.zip numbers]
-  puts hash
+  puts total = {
+    "a" => hash["a"],
+    "e" => hash["e"],
+    "i" => hash["i"],
+    "o" => hash["o"],
+    "u" => hash["u"],
+    "y" => hash["y"],
+  }
 end
 
-letters
+alphabet

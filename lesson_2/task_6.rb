@@ -15,15 +15,13 @@ def shop
   cart.delete("stop")
   puts cart
 
-  cart.each do |key, value|
-    puts "#{key}: #{value[:price] * value[:amount] }"
-  end
-
   total_price = 0
 
-  cart.each_value do |item|
-    total_price += item[:price] *  item[:amount]
-  end  
+  cart.each do |key, value|
+    puts "#{key}: #{value[:price] * value[:amount] }"
+    total_price += value[:price] *  value[:amount]
+  end
+
   puts "total: #{total_price}$" 
 end
 
