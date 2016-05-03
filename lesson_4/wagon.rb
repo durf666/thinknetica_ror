@@ -1,4 +1,4 @@
-module Wagon
+class Wagon
   def new(train)
     train.new_wagon 
   end
@@ -6,12 +6,4 @@ module Wagon
   def destroy(train)
     train.destroy_wagon
   end  
-end
-
-class PassengerWagon
-  include Wagon  
-end
-
-class CargoWagon
-  include Wagon 
 end
