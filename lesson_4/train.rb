@@ -15,12 +15,12 @@ class Train < Route
     self.speed = 0
   end
 
-  def new_wagon
+  def new_wagon(wagon)
     @quantity_wagon += 1 if @speed == 0
     puts @quantity_wagon
   end
 
-  def destroy_wagon
+  def destroy_wagon(wagon)
     @quantity_wagon -= 1 if @speed == 0
     puts @quantity_wagon
   end

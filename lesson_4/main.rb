@@ -18,10 +18,10 @@ passenger_train = PassengerTrain.new("7B", 20)
 cargo_train = CargoTrain.new("1A", 40)
 
 passenger_wagon = PassengerWagon.new
-passenger_wagon.new(passenger_train)
+passenger_train.new_wagon(passenger_wagon)
 
 cargo_wagon = CargoWagon.new
-cargo_wagon.destroy(cargo_train)
+cargo_train.destroy_wagon(cargo_wagon)
 
 station = Station.new("Kursk")
 station.accept_train("7B")
