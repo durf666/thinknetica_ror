@@ -21,7 +21,7 @@ passenger_wagon = PassengerWagon.new
 passenger_train.new_wagon(passenger_wagon)
 
 cargo_wagon = CargoWagon.new
-cargo_train.destroy_wagon(cargo_wagon)
+cargo_train.new_wagon(cargo_wagon)
 
 station = Station.new("Kursk")
 station.accept_train("7B")

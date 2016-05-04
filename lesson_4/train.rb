@@ -1,5 +1,6 @@
 class Train < Route
   @@arr_train = []
+  @@wagons = []
   
   attr_accessor :speed
   attr_reader   :quantity_wagon
