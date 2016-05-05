@@ -1,15 +1,16 @@
 class Train < Route
   @@arr_train = []
-  @@wagons = []
-  
+    
   attr_accessor :speed
   attr_reader   :quantity_wagon
+  attr_reader   :wagons
 
   def initialize(speed=0, number_train, quantity_wagon)
     @number_train = number_train
     @quantity_wagon = quantity_wagon    
     @speed = speed
     @@arr_train << @number_train
+    @wagons = []
   end  
 
   def stop
@@ -17,8 +18,7 @@ class Train < Route
   end
 
   def new_wagon(wagon)
-    @quantity_wagon += 1 if @speed == 0
-    puts @quantity_wagon
+    @wagons << @wagon
   end
 
   def destroy_wagon(wagon)

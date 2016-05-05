@@ -1,7 +1,7 @@
 class PassengerTrain < Train
   def new_wagon(wagon)
     if wagon.class == PassengerWagon
-      @@wagons << @wagon
+      super(wagon)
     else
       puts "false"
     end
