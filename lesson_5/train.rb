@@ -1,6 +1,8 @@
 class Train < Route
   @@arr_train = []
-    
+  @@hash_train = {}
+  
+  include Producer
   attr_accessor :speed
   attr_reader   :quantity_wagon
   attr_reader   :wagons
@@ -11,6 +13,11 @@ class Train < Route
     @speed = speed
     @@arr_train << @number_train
     @wagons = []
+    @@hash_train[@number_train] = self   
+  end
+
+  def self.find(number_train)
+    puts @@hash_train[number_train]
   end  
 
   def stop
