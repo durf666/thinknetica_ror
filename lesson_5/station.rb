@@ -4,7 +4,7 @@ class Station < Train
   
   def initialize(name_station)
     @name_station = name_station
-    @@array_station << @name_station 
+    @@array_station << self
   end
 
   def self.all
