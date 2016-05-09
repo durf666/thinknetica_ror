@@ -1,13 +1,11 @@
 class Station < Train  
   @@arr_train_on_station = []
   @@array_station = []
-  
+    
   def initialize(name_station)
     @name_station = name_station
-    @@array_station << self
     validate_station!
-    rescue StandardError
-      puts "Argument isn't correct"
+    @@array_station << self
   end
 
   def self.all
@@ -44,8 +42,7 @@ class Station < Train
 
   protected
 
-  def validate_station!
-    raise "Station's name can't be nil" if @name_station.nil?
+  def validate_station!    
     raise "Station's name, should be at least 3 symbols" if @name_station.length < 3
     true 
   end

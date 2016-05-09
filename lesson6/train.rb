@@ -8,17 +8,15 @@ class Train < Route
   attr_accessor :speed
   attr_reader   :quantity_wagon
   attr_reader   :wagons
-
+     
   def initialize(speed=0, number_train, quantity_wagon)
     @number_train = number_train
     @quantity_wagon = quantity_wagon    
     @speed = speed
+    validate_train!      
     @@arr_train << @number_train
     @wagons = []
     @@hash_train[@number_train] = self
-    validate_train!
-    rescue StandardError
-      puts "Argument isn't correct"   
   end
 
   def self.find(number_train)
@@ -76,6 +74,6 @@ class Train < Route
     raise "Train's number and quantity wagons can't be nil" if @number_train.nil? or @quantity_wagon.nil?    
     raise "Train's number has invalid format" if @number_train !~ FORMAT_TRAIN
     raise "Quantity wagons should be natural number or zero" if @quantity_wagon !~ FORMAT_WAGON
-    true 
+    true
   end
 end
