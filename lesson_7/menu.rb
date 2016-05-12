@@ -1,10 +1,20 @@
 class Menu
+  def initialize
+    @train = {}
+    @station = {}
+    @stations = []
+  end
+
   def run
     loop do
       puts "1 - create train"
       puts "2 - create station"
       puts "3 - create wagon"
       puts "4 - take place"
+      puts "5 - send train on station"
+      puts "6 - show train on station"
+      puts "7 - show wagons of trains"
+      puts "8 - add wagon to train"
       puts "0 - exit"
       print "Make your choice: "
       choice = gets.chomp.to_i
@@ -19,6 +29,14 @@ class Menu
         create_wagon
       when 4
         take_place
+      when 5
+        send_train
+      when 6
+        show_train
+      when 7
+        show_wagon
+      when 8
+        add_wagon
       end                  
   end
 end
@@ -33,11 +51,13 @@ private
     if type == "passenger"
       train = PassengerTrain.new(number)
       puts train.inspect
+      @train[number] = train
     elsif type == "cargo"
       train = CargoTrain.new(number)
       puts train.inspect
+      @train[number] = train
     else
-      raise ArgumentError, "Train's type isn't correct"
+      raise "Train's type isn't correct"
     end
   rescue Exception => e
     puts e.message
@@ -47,8 +67,10 @@ private
   def create_station
     print "Station's name: "
     name = gets.chomp
-    name = Station.new(name)
-    puts name.inspect
+    station = Station.new(name)
+    puts station.inspect
+    @station[name] = station
+    @stations << station
   rescue Exception => e
     puts e.message
     retry
@@ -56,12 +78,12 @@ private
 
   def create_wagon
     print "Wagon's type (passenger/cargo): "
-    wagon = gets.chomp
+    type = gets.chomp
     print "Enter seat/volume for wagon: "
     points = gets.chomp.to_i
-    if wagon == "passenger"
+    if type == "passenger"
       @wagon = PassengerWagon.new(points)
-    elsif wagon == "cargo"
+    elsif type == "cargo"
       @wagon = CargoWagon.new(points)
     else
       puts "You made mistake!"
@@ -79,5 +101,38 @@ private
     else
       puts "This wagon isn't exist"
     end
-  end     
+  end
+
+  def send_train
+    print "Enter station: "
+    station = gets.chomp
+    print "Enter train's number "
+    number = gets.chomp
+    raise "Station or train isn't exist" if @station[station].nil? or @train[number].nil?
+    @station[station].accept_train(@train[number], number)
+    puts "Train number #{number} arrived on station #{station}"
+  rescue Exception => e
+    puts e.message
+  end
+
+  def show_train
+    print "Enter station: "
+    name = gets.chomp
+    station = @station[name]
+    station.each_train(&proc_train(station))
+  end
+
+  def show_wagon
+    print "Enter train's number: "
+    number = gets.chomp 
+    train = @train[number]
+    train.each_wagon(&proc_wagon(train))
+  end
+
+  def add_wagon
+    print "Enter train's number: "
+    number = gets.chomp
+    train = @train[number]
+    train.new_wagon(@wagon)
+  end  
 end
