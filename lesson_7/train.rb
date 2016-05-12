@@ -17,7 +17,7 @@ class Train < Route
     @@hash_train[@number_train] = self
   end
 
-  def each(&block)
+  def each_wagon(&block)
     @wagons.each { |wagon| yield(wagon) }
   end
 

@@ -13,7 +13,7 @@ s1 = Station.new('s1')
 s2 = Station.new('s2')
 s3 = Station.new('s3')
 
-stations = Station.all
+@stations = Station.all
 
 pt1 = PassengerTrain.new('p1000')
 pt2 = PassengerTrain.new('p2000')
@@ -46,10 +46,51 @@ s2.accept_train(pt3, 'p3000')
 s3.accept_train(ct1, 'c1000')
 s3.accept_train(pt4, 'p4000')
 
-stations.each do |station|
+def proc_train(station)
+  proc do |number, train|
+    puts "____________________________________________________________________"
+    puts "Station #{@stations.index(station) + 1} - train's number: #{number}, type: #{train.class}, wagons: #{train.wagons.size}"
+  end
+end
+
+def proc_wagon(train)
+  proc do |wagon|
+    print "wagon: #{train.wagons.index(wagon) + 1}, type: #{wagon.class}, "
+      if wagon.class == PassengerWagon
+        puts "free seats: #{wagon.seat}, occupied seats: #{wagon.occupied}"
+      end
+      if wagon.class == CargoWagon
+        puts "free volume: #{wagon.free}, occupied volume: #{wagon.occupy_volume}"
+      end
+  end
+end
+
+@stations.each do |station|
+  station.each_train do |number, train|
+    proc_train(station).call(number, train)
+    train.each_wagon(&proc_wagon(train))
+  end
+end
+
+Menu.new.run
+
+
+=begin
+@stations.each do |station|
+  station.each_train do |number, train|
+    proc_train(station).call(number, train)
+    train.wagons.each do |wagon|
+      proc_wagon(train, wagon).call(wagon)
+    end
+  end
+end
+=end
+
+=begin
+@stations.each do |station|
   station.each do |number, train|
     puts "____________________________________________________________________"
-    puts "Station #{stations.index(station) + 1} - train's number: #{number}, type: #{train.class}, wagons: #{train.wagons.size}"
+    puts "Station #{@stations.index(station) + 1} - train's number: #{number}, type: #{train.class}, wagons: #{train.wagons.size}"
       train.wagons.each do |wagon|
         print "wagon: #{train.wagons.index(wagon) + 1}, type: #{wagon.class}, "
         if wagon.class == PassengerWagon
@@ -61,5 +102,4 @@ stations.each do |station|
       end
   end
 end
-
-Menu.new.run
+=end

@@ -9,7 +9,7 @@ class Station < Train
     @@array_station << self
   end
 
-  def each(&block)
+  def each_train(&block)
     @hash_train_on_station.each { |number, train| yield(number, train) }
   end
 
