@@ -3,7 +3,7 @@ class PassengerTrain < Train
     if wagon.class == PassengerWagon
       super(wagon)
     else
-      puts "false"
+      puts 'false'
     end
   end
 end

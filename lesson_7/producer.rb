@@ -12,7 +12,7 @@ module Producer
 
   def validate!
     raise "Company name can't be nil" if name_company.nil?
-    raise "Company name has invalid format" if name_company !~ FORMAT_PRODUCER
+    raise 'Company name has invalid format' if name_company !~ FORMAT_PRODUCER
     true
   end
 end

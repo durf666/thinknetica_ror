@@ -1,3 +1,3 @@
-class Wagon 
+class Wagon
   include Producer
 end

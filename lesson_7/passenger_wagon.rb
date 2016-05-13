@@ -3,7 +3,7 @@ class PassengerWagon < Wagon
 
   def initialize(seat)
     @seat = seat
-    @total_seat = seat   
+    @total_seat = seat
   end
 
   def occupy_seat

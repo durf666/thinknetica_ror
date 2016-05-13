@@ -1,29 +1,33 @@
 class Train < Route
+  # rubocop:disable Style/ClassVars
   @@arr_train = []
   @@hash_train = {}
   FORMAT_TRAIN = /^[0-9a-z]{3}-*[0-9a-z]{2}$/i
-  
+  # rubocop:enable Style/ClassVars
+
   include Producer
   attr_accessor :speed
   attr_reader   :quantity_wagon
   attr_reader   :wagons
-     
-  def initialize(speed=0, number_train)
-    @number_train = number_train    
+
+  def initialize(number_train, speed = 0)
+    @number_train = number_train
     @speed = speed
-    validate_train!      
-    @@arr_train << @number_train    
-    @wagons = []   
+    validate_train!
+    @@arr_train << @number_train
+    @wagons = []
     @@hash_train[@number_train] = self
   end
 
+  # rubocop:disable Lint/UnusedMethodArgument
   def each_wagon(&block)
     @wagons.each { |wagon| yield(wagon) }
   end
 
+  # rubocop:enable Lint/UnusedMethodArgument
   def self.find(number_train)
     @@hash_train[number_train]
-  end  
+  end
 
   def stop
     self.speed = 0
@@ -37,10 +41,7 @@ class Train < Route
     @wagons.pop(wagon) if @speed == 0
   end
 
-  def route_train
-    @@arr_station
-  end
-
+  # rubocop:disable Metrics/LineLength
   def arrive(name_station)
     @name_station = name_station
     if @@arr_station.include?(@name_station)
@@ -52,8 +53,8 @@ class Train < Route
     hash = Hash[@@arr_station.map.with_index.to_a]
     index = hash[@name_station]
 
-    if index == nil
-      puts "Try to enter other station"
+    if index.nil?
+      puts 'Try to enter other station'
     elsif index == 0
       puts "It's initial station, next station is #{@@arr_station[index + 1]}"
     elsif index == @@arr_station.size - 1
@@ -62,6 +63,7 @@ class Train < Route
       puts "previous station is #{@@arr_station[index - 1]}, next station is #{@@arr_station[index + 1]}"
     end
   end
+  # rubocop:enable Metrics/LineLength
 
   def valid_train?
     validate_train!
@@ -72,7 +74,7 @@ class Train < Route
   protected
 
   def validate_train!
-    raise "Train's number can't be nil" if @number_train.nil?   
+    raise "Train's number can't be nil" if @number_train.nil?
     raise "Train's number has invalid format" if @number_train !~ FORMAT_TRAIN
     true
   end
